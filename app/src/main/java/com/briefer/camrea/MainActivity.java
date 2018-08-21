@@ -64,10 +64,10 @@ public class MainActivity extends Activity implements OnCaptureCallback {
         btn_ok = (Button) findViewById(R.id.btn_ok);
         btn_cancel = (Button) findViewById(R.id.btn_cancel);
 
-//		设置矩形区域大小
+        //设置矩形区域大小
         this.surfaceview.setMaskSize(900, 600);
 
-//		拍照
+        //拍照
         btn_capture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,7 +78,7 @@ public class MainActivity extends Activity implements OnCaptureCallback {
             }
         });
 
-//		重拍
+        //重拍
         btn_recapture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,12 +92,12 @@ public class MainActivity extends Activity implements OnCaptureCallback {
             }
         });
 
-//		确认
+        //确认
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 Bitmap bitmap = BitmapFactory.decodeFile(filepath);
-                Toast.makeText(MainActivity.this, "图片高度：" + bitmap.getHeight() + "..." + "图片宽度：" + bitmap.getWidth() + "...图片大小：" + bitmap.getByteCount()/10240, Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "图片高度：" + bitmap.getHeight() + "..." + "图片宽度：" + bitmap.getWidth() + "...图片大小：" + bitmap.getByteCount() / 10240, Toast.LENGTH_LONG).show();
 
                 //上传服务器到后台
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -108,7 +108,7 @@ public class MainActivity extends Activity implements OnCaptureCallback {
             }
         });
 
-//		取消
+        //取消
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -121,12 +121,12 @@ public class MainActivity extends Activity implements OnCaptureCallback {
     /**
      * 删除图片文件呢
      */
-    private void deleteFile(){
-        if(this.filepath==null || this.filepath.equals("")){
+    private void deleteFile() {
+        if (this.filepath == null || this.filepath.equals("")) {
             return;
         }
         File f = new File(this.filepath);
-        if(f.exists()){
+        if (f.exists()) {
             f.delete();
         }
     }
@@ -135,12 +135,12 @@ public class MainActivity extends Activity implements OnCaptureCallback {
     public void onCapture(boolean success, String filepath) {
         this.filepath = filepath;
         String message = "拍照成功";
-        if(!success){
+        if (!success) {
             message = "拍照失败";
             CameraHelper.getInstance().startPreview();
             this.imageView.setVisibility(View.GONE);
             this.surfaceview.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             this.imageView.setVisibility(View.VISIBLE);
             this.surfaceview.setVisibility(View.GONE);
             this.imageView.setImageBitmap(BitmapFactory.decodeFile(filepath));
@@ -172,7 +172,7 @@ public class MainActivity extends Activity implements OnCaptureCallback {
             if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 finish();
                 Toast.makeText(this, "相机和存储权限必须打开", Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 //....
             }
         }
